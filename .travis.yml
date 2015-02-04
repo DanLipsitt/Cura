@@ -7,7 +7,7 @@ env:
   - pkgdir="/Volumes/Python 2.7.3/Python.mpkg/Contents/Packages"
 before_install:
   - wget http://www.python.org/ftp/python/2.7.3/python-2.7.3-macosx10.6.dmg
-  - hdutil mount python-2.7.3-macosx10.6.dmg
+  - hdiutil mount python-2.7.3-macosx10.6.dmg
   - sudo installer -package "$pkgdir/PythonFramework-2.7.pkg"
     -target "/Volumes/Macintosh HD" -allowUntrusted -dumplog
   - sudo installer -package "$pkgdir/PythonUnixTools-2.7.pkg"
