@@ -14,5 +14,5 @@ before_install:
     -target "/" -allowUntrusted -dumplog
   - sudo installer -package "$pkgdir/PythonProfileChanges-2.7.pkg"
     -target "/" -allowUntrusted -dumplog
-install: "pip install -r requirements-darwin.txt"
+install: "pip install -r requirements_darwin.txt"
 script: scripts/darwin/check_build_env.py
