@@ -4,7 +4,9 @@ os:
 python:
   - "2.7"
 before_install:
-  - brew update
-  - brew install --build-bottle --fresh ./scripts/darwin/python.rb --universal
+  - wget http://www.python.org/ftp/python/2.7.3/python-2.7.3-macosx10.6.dmg
+  - hdutil mount python-2.7.3-macosx10.6.dmg
+  - sudo installer -package "/Volumes/Python 2.7.3/Python.mpkg"
+    -target "/Volumes/Macintosh HD" -allowUntrusted -dumplog
 install: "pip install -r requirements-darwin.txt"
 script: scripts/darwin/check_build_env.py
