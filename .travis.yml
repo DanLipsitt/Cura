@@ -1,0 +1,10 @@
+language: python
+os:
+  - osx
+python:
+  - "2.7"
+before_install:
+  - brew update
+  - brew install --build-bottle --fresh Cura/scripts/darwin/python.rb --universal
+install: "pip install -r requirements-darwin.txt"
+script: scripts/darwin/check_build_env.py
