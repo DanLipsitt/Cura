@@ -2,4 +2,5 @@
 
 py2app==0.7.2
 pyobjc-core
-pyobjc>=2.5
+pyobjc-framework-Cocoa>=2.5
+pyobjc-framework-Quartz>=2.5
