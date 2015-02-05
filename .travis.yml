@@ -17,13 +17,15 @@ before_install:
   - sudo installer -package "$pkgdir/PythonProfileChanges-2.7.pkg"
     -target "/" -allowUntrusted -dumplog
   - sudo pip install
-     mkwheelhouse
      virtualenv
 install:
+  - virtualenv wheelenv && source wheelenv/bin/activate
+  - pip install mkwheelhouse
   - for req in $(grep -h '^[^- ]' requirements.txt requirements_darwin.txt);
     do pip install --find-links "$wheelhouse" --no-index "$req" ||
     mkwheelhouse "$wheelhouse" "$req";
     done
+  - deactivate
 script:
   - virtualenv testenv && source testenv/bin/activate
   - pip install --find-links "$wheelhouse" --no-index -r requirements_darwin.txt
