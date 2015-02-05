@@ -6,7 +6,10 @@ python:
 env:
   global:
     - pkgdir="/Volumes/Python 2.7.3/Python.mpkg/Contents/Packages"
+    - bucket="typea-wheelhouse"
     - wheelhouse="https://s3-us-west-1.amazonaws.com/typea-wheelhouse/index.html"
+    - AWS_ACCESS_KEY_ID="AKIAJOCYHVNQQKP3BN3A"
+    - secure: "OuzbvcAKTyc6qv9FzGC7oO6z5KYErT79vHRgUFtvvWNxGd6cQKwITKJ4DW3IsNtjDXI5a+1ZeWD9LJHSmy3O73img4y3OnMpHhYrhWK3oFgIswilZYl+B8oSV3h1Pj1wurFJ+1u4Wy908YQEE9guknVWXMeIWglt6STLiJ2KPys="
 before_install:
   - wget http://www.python.org/ftp/python/2.7.3/python-2.7.3-macosx10.6.dmg
   - hdiutil mount python-2.7.3-macosx10.6.dmg
@@ -23,7 +26,7 @@ install:
   - pip install mkwheelhouse
   - for req in $(grep -h '^[^- ]' requirements.txt requirements_darwin.txt);
     do pip install --find-links "$wheelhouse" --no-index "$req" ||
-    mkwheelhouse "$wheelhouse" "$req";
+    mkwheelhouse "$bucket" "$req";
     done
   - deactivate
 script:
