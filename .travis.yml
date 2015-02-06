@@ -5,6 +5,8 @@ python:
   - "2.7"
 env:
   global:
+    - PYTHON_HOME="/Library/Frameworks/Python.framework/Versions/2.7"
+    - PIP="${PYTHON_HOME}/bin/pip"
     - MACOSX_DEPLOYMENT_TARGET="10.6"
     - pkgdir="/Volumes/Python 2.7.3/Python.mpkg/Contents/Packages"
     - bucket="typea-wheelhouse"
@@ -20,16 +22,17 @@ before_install:
     -target "/" -allowUntrusted -dumplog
   - sudo installer -package "$pkgdir/PythonProfileChanges-2.7.pkg"
     -target "/" -allowUntrusted -dumplog
-  - sudo pip install
+  - sudo $PIP install
      virtualenv
 install:
   - virtualenv wheelenv && source wheelenv/bin/activate
-  - pip install mkwheelhouse
+  - $PIP install mkwheelhouse
+  # Install or create cached wheels on s3.
   - for req in $(grep -h '^[^- ]' requirements.txt requirements_darwin.txt);
-    do pip install --find-links "$wheelhouse" --no-index "$req" ||
+    do $PIP install --find-links "$wheelhouse" --no-index "$req" ||
     mkwheelhouse "$bucket" "$req";
     done
   - deactivate
 script:
   - virtualenv testenv && source testenv/bin/activate
-  - pip install --find-links "$wheelhouse" --no-index -r requirements_darwin.txt
+  - $PIP install --find-links "$wheelhouse" --no-index -r requirements_darwin.txt
