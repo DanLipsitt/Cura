@@ -5,6 +5,7 @@ python:
   - "2.7"
 env:
   global:
+    - MACOSX_DEPLOYMENT_TARGET="10.6"
     - pkgdir="/Volumes/Python 2.7.3/Python.mpkg/Contents/Packages"
     - bucket="typea-wheelhouse"
     - wheelhouse="https://s3-us-west-1.amazonaws.com/typea-wheelhouse/index.html"
