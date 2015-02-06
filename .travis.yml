@@ -22,6 +22,7 @@ before_install:
     -target "/" -allowUntrusted -dumplog
   - sudo installer -package "$pkgdir/PythonProfileChanges-2.7.pkg"
     -target "/" -allowUntrusted -dumplog
+  - ls -l $(which python; which pip)
   - sudo $PIP install
      virtualenv
 install:
